@@ -12,22 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .accountant import IAccountant
+from .accountant import IAccountant, SAccountant
+from .mechanisms.rdp import GaussianMechanism
 from .gdp import GaussianAccountant
 from .rdp import RDPAccountant
+from .rdp import RDPGeneralSubsampledAccountant
 
 
 __all__ = [
     "IAccountant",
+    "SAccountant",
     "GaussianAccountant",
     "RDPAccountant",
+    "RDPGeneralSubsampledAccountant"
 ]
-
 
 def create_accountant(mechanism: str) -> IAccountant:
     if mechanism == "rdp":
         return RDPAccountant()
     elif mechanism == "gdp":
         return GaussianAccountant()
+    elif mechanism == "rdp_general"
+        return RDPGeneralSubsampledAccountant(mechanism = GaussianMechanism(sigma = 1))
 
     raise ValueError(f"Unexpected accounting mechanism: {mechanism}")
